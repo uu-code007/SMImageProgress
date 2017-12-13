@@ -15,8 +15,9 @@
 		E35EF8A81FBD4525002E8262 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E35EF8A71FBD4525002E8262 /* main.m */; };
 		E35EF8B41FBD6058002E8262 /* SMCircularProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = E35EF8B31FBD6058002E8262 /* SMCircularProgressView.m */; };
 		E35EF8B71FBD60C7002E8262 /* SMCircularProgressLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = E35EF8B61FBD60C7002E8262 /* SMCircularProgressLayer.m */; };
-		E35EF8BA1FBDA71B002E8262 /* UIImageView+SMCircularProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = E35EF8B91FBDA71B002E8262 /* UIImageView+SMCircularProgress.m */; };
 		E35EF8BD1FBE7AB7002E8262 /* SMLabelCircularProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = E35EF8BC1FBE7AB7002E8262 /* SMLabelCircularProgressView.m */; };
+		E37604451FDE2A4200B010B8 /* sm_400.png in Resources */ = {isa = PBXBuildFile; fileRef = E37604441FDE2A4200B010B8 /* sm_400.png */; };
+		E3BEEF821FE0BB6100865197 /* UIView+SMCircularProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = E3BEEF801FE0BB6100865197 /* UIView+SMCircularProgress.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,10 +35,11 @@
 		E35EF8B31FBD6058002E8262 /* SMCircularProgressView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SMCircularProgressView.m; sourceTree = "<group>"; };
 		E35EF8B51FBD60C7002E8262 /* SMCircularProgressLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SMCircularProgressLayer.h; sourceTree = "<group>"; };
 		E35EF8B61FBD60C7002E8262 /* SMCircularProgressLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SMCircularProgressLayer.m; sourceTree = "<group>"; };
-		E35EF8B81FBDA71B002E8262 /* UIImageView+SMCircularProgress.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImageView+SMCircularProgress.h"; sourceTree = "<group>"; };
-		E35EF8B91FBDA71B002E8262 /* UIImageView+SMCircularProgress.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+SMCircularProgress.m"; sourceTree = "<group>"; };
 		E35EF8BB1FBE7AB7002E8262 /* SMLabelCircularProgressView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SMLabelCircularProgressView.h; sourceTree = "<group>"; };
 		E35EF8BC1FBE7AB7002E8262 /* SMLabelCircularProgressView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SMLabelCircularProgressView.m; sourceTree = "<group>"; };
+		E37604441FDE2A4200B010B8 /* sm_400.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sm_400.png; sourceTree = "<group>"; };
+		E3BEEF801FE0BB6100865197 /* UIView+SMCircularProgress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SMCircularProgress.m"; sourceTree = "<group>"; };
+		E3BEEF811FE0BB6100865197 /* UIView+SMCircularProgress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SMCircularProgress.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,14 +89,15 @@
 		E35EF8AE1FBD45A8002E8262 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				E37604441FDE2A4200B010B8 /* sm_400.png */,
 				E35EF8B21FBD6058002E8262 /* SMCircularProgressView.h */,
 				E35EF8B31FBD6058002E8262 /* SMCircularProgressView.m */,
 				E35EF8B51FBD60C7002E8262 /* SMCircularProgressLayer.h */,
 				E35EF8B61FBD60C7002E8262 /* SMCircularProgressLayer.m */,
-				E35EF8B81FBDA71B002E8262 /* UIImageView+SMCircularProgress.h */,
-				E35EF8B91FBDA71B002E8262 /* UIImageView+SMCircularProgress.m */,
 				E35EF8BB1FBE7AB7002E8262 /* SMLabelCircularProgressView.h */,
 				E35EF8BC1FBE7AB7002E8262 /* SMLabelCircularProgressView.m */,
+				E3BEEF811FE0BB6100865197 /* UIView+SMCircularProgress.h */,
+				E3BEEF801FE0BB6100865197 /* UIView+SMCircularProgress.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -157,6 +160,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E37604451FDE2A4200B010B8 /* sm_400.png in Resources */,
 				E35EF8A51FBD4525002E8262 /* LaunchScreen.storyboard in Resources */,
 				E35EF8A21FBD4525002E8262 /* Assets.xcassets in Resources */,
 				E35EF8A01FBD4525002E8262 /* Main.storyboard in Resources */,
@@ -174,8 +178,8 @@
 				E35EF8B41FBD6058002E8262 /* SMCircularProgressView.m in Sources */,
 				E35EF8A81FBD4525002E8262 /* main.m in Sources */,
 				E35EF89A1FBD4525002E8262 /* AppDelegate.m in Sources */,
+				E3BEEF821FE0BB6100865197 /* UIView+SMCircularProgress.m in Sources */,
 				E35EF8BD1FBE7AB7002E8262 /* SMLabelCircularProgressView.m in Sources */,
-				E35EF8BA1FBDA71B002E8262 /* UIImageView+SMCircularProgress.m in Sources */,
 				E35EF8B71FBD60C7002E8262 /* SMCircularProgressLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

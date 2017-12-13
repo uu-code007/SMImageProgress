@@ -9,9 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "SMLabelCircularProgressView.h"
 
-//@class SMLabelCircularProgressView;
 
-@interface UIImageView (SMCircularProgress)
+@interface UIView (SMCircularProgress)
 
 @property (strong, nonatomic) SMLabelCircularProgressView *sm_progressView;
 @end

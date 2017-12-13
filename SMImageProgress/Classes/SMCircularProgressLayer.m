@@ -8,6 +8,8 @@
 
 #import "SMCircularProgressLayer.h"
 
+#define maskColor [[UIColor blackColor] colorWithAlphaComponent:0.7]
+
 @implementation SMCircularProgressLayer
 
 + (BOOL)needsDisplayForKey:(NSString *)key{
@@ -19,19 +21,39 @@
 }
 
 - (void)drawInContext:(CGContextRef)context{
+   
+    if (self.progressStyle == SMCircularProgressStyleAnnular) {
+        [self drawAnnularInContext:context];
+    }else{
+        [self drawPieChartInContext:context];
+    }
+}
+
+- (void)drawAnnularInContext:(CGContextRef)context{
     CGPoint centerPoint = CGPointMake(self.bounds.size.width / 2.0f, self.bounds.size.height / 2.0f);
     CGFloat progress = MIN(self.progress, 1.0f - FLT_EPSILON);
     CGFloat radians = 0;
     radians = (float)((progress * 2.0f * M_PI) - M_PI_2);
-  
-    CGContextSetFillColorWithColor(context, self.trackTintColor.CGColor);
-    CGMutablePathRef trackPath = CGPathCreateMutable();
-    CGPathMoveToPoint(trackPath, NULL, centerPoint.x, centerPoint.y);
-    CGPathAddArc(trackPath, NULL, centerPoint.x, centerPoint.y, _radius, (float)(2.0f * M_PI), 0.0f, TRUE);
-    CGPathCloseSubpath(trackPath);
-    CGContextAddPath(context, trackPath);
+    
+    if (_progressMaskType == SMCircularMaskTypeBlack) {
+        CGContextSetFillColorWithColor(context, maskColor.CGColor);
+        CGMutablePathRef rectPath = CGPathCreateMutable();
+        CGPathMoveToPoint(rectPath, NULL, centerPoint.x, centerPoint.y);
+        CGPathAddRect(rectPath, NULL, self.maskRect);
+        CGPathCloseSubpath(rectPath);
+        CGContextAddPath(context, rectPath);
+        CGContextFillPath(context);
+        CGPathRelease(rectPath);
+    }
+    
+    CGContextSetFillColorWithColor(context, _innerTintColor.CGColor);
+    CGMutablePathRef progressPath = CGPathCreateMutable();
+    CGPathMoveToPoint(progressPath, NULL, centerPoint.x, centerPoint.y);
+    CGPathAddArc(progressPath, NULL, centerPoint.x, centerPoint.y, _radius, (float)(4.0f * M_PI_2), 0, false);
+    CGPathCloseSubpath(progressPath);
+    CGContextAddPath(context, progressPath);
     CGContextFillPath(context);
-    CGPathRelease(trackPath);
+    CGPathRelease(progressPath);
     
     if (progress > 0.0f) {
         CGContextSetFillColorWithColor(context, self.progressTintColor.CGColor);
@@ -80,11 +102,59 @@
     CGContextAddEllipseInRect(context, clearRect);
     CGContextFillPath(context);
     
-    if (self.innerTintColor) {
+  //  if (_progressMaskType == SMCircularMaskTypeBlack) {
         CGContextSetBlendMode(context, kCGBlendModeNormal);
-        CGContextSetFillColorWithColor(context, [self.innerTintColor CGColor]);
+        CGContextSetFillColorWithColor(context, maskColor.CGColor);
         CGContextAddEllipseInRect(context, clearRect);
         CGContextFillPath(context);
+ //   }
+}
+
+
+-(void)drawPieChartInContext:(CGContextRef)context{
+    CGPoint centerPoint = CGPointMake(self.bounds.size.width / 2.0f, self.bounds.size.height / 2.0f);
+    CGFloat progress = MIN(self.progress, 1.0f - FLT_EPSILON);
+    CGFloat radians = 0;
+    radians = (float)((progress * 2.0f * M_PI) - M_PI_2);
+    
+    CGContextSetFillColorWithColor(context, maskColor.CGColor);
+    CGMutablePathRef rectPath = CGPathCreateMutable();
+    CGPathMoveToPoint(rectPath, NULL, centerPoint.x, centerPoint.y);
+    CGPathAddRect(rectPath, NULL, self.maskRect);
+    CGPathCloseSubpath(rectPath);
+    CGContextAddPath(context, rectPath);
+    CGContextFillPath(context);
+    CGPathRelease(rectPath);
+    
+    CGContextSetBlendMode(context, kCGBlendModeClear);
+    CGMutablePathRef trackPath = CGPathCreateMutable();
+    CGPathMoveToPoint(trackPath, NULL, centerPoint.x, centerPoint.y);
+    CGPathAddArc(trackPath, NULL, centerPoint.x, centerPoint.y, _radius, (float)(2.0f * M_PI), 0.0f, TRUE);
+    CGPathCloseSubpath(trackPath);
+    CGContextAddPath(context, trackPath);
+    CGContextFillPath(context);
+    CGPathRelease(trackPath);
+    
+    CGContextSetBlendMode(context, kCGBlendModeNormal);
+    CGContextSetFillColorWithColor(context, maskColor.CGColor);
+    CGMutablePathRef centTintPath = CGPathCreateMutable();
+    CGPathMoveToPoint(centTintPath, NULL, centerPoint.x, centerPoint.y);
+    CGPathAddArc(centTintPath, NULL, centerPoint.x, centerPoint.y, _radius - _radius * self.thicknessRatio, (float)(2.0f * M_PI), 0.0f, TRUE);
+    CGPathCloseSubpath(centTintPath);
+    CGContextAddPath(context, centTintPath);
+    CGContextFillPath(context);
+    CGPathRelease(centTintPath);
+    
+    if (progress > 0.0f) {
+        CGContextSetBlendMode(context, kCGBlendModeClear);
+        CGContextSetFillColorWithColor(context,[UIColor clearColor].CGColor);  //self.progressTintColor.CGColor);
+        CGMutablePathRef progressPath = CGPathCreateMutable();
+        CGPathMoveToPoint(progressPath, NULL, centerPoint.x, centerPoint.y);
+        CGPathAddArc(progressPath, NULL, centerPoint.x, centerPoint.y, _radius, (float)(3.0f * M_PI_2), radians, false);
+        CGPathCloseSubpath(progressPath);
+        CGContextAddPath(context, progressPath);
+        CGContextFillPath(context);
+        CGPathRelease(progressPath);
     }
 }
 

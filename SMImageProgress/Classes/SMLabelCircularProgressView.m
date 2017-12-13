@@ -31,14 +31,26 @@
 
 #pragma mark - Internal methods
 
-- (void)initializeLabel
-{
+- (void)initializeLabel{
+
     self.progressLabel = [[UILabel alloc] initWithFrame:self.bounds];
-    self.progressLabel.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+//    self.progressLabel.center = self.center;
+//    self.progressLabel.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     self.progressLabel.textAlignment = NSTextAlignmentCenter;
+    
+    self.progressLabel.adjustsFontSizeToFitWidth = YES;
+    self.progressLabel.textColor = [UIColor whiteColor];
     self.progressLabel.backgroundColor = [UIColor clearColor];
     [self addSubview:self.progressLabel];
 }
 
+
+-(void)layoutSubviews{
+    CGFloat magrin = 2;
+    CGFloat labelW = 2 * self.radius * (1 - self.thicknessRatio);
+    CGRect labelFrame = CGRectMake(self.center.x - (labelW  - magrin)/2, self.center.y - labelW/2 ,labelW - magrin,labelW);
+    self.progressLabel.frame = labelFrame;
+   
+}
 
 @end

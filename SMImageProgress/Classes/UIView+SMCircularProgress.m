@@ -6,11 +6,11 @@
 //  Copyright © 2017年 孙慕. All rights reserved.
 //
 
-#import "UIImageView+SMCircularProgress.h"
+#import "UIView+SMCircularProgress.h"
 #import "SMLabelCircularProgressView.h"
 #import <objc/runtime.h>
 
-@implementation UIImageView (SMCircularProgress)
+@implementation UIView (SMCircularProgress)
 
 static const char SMCircularProgressKey = '\0';
 
@@ -18,7 +18,7 @@ static const char SMCircularProgressKey = '\0';
     if (sm_progressView != self.sm_progressView ) {
         [self.sm_progressView removeFromSuperview];
         // 存储新的
-        [self insertSubview:sm_progressView atIndex:0];
+        [self insertSubview:sm_progressView atIndex:999];
         sm_progressView.frame = self.bounds;
         [self willChangeValueForKey:@"sm_progressView"]; // KVO
         objc_setAssociatedObject(self, &SMCircularProgressKey,
@@ -26,8 +26,9 @@ static const char SMCircularProgressKey = '\0';
         [self didChangeValueForKey:@"sm_progressView"]; // KVO
     }
 }
-- (SMLabelCircularProgressView *)sm_progressView
-{
+- (SMLabelCircularProgressView *)sm_progressView{
+
+    
     return objc_getAssociatedObject(self, &SMCircularProgressKey);
 }
 
