@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
   #   * Try to keep it short, snappy and to the point.
   #   * Write the description between the DESC delimiters below.
   #   * Finally, don't worry about the indent, CocoaPods strips it!
-  s.description  = "图片上传加载进度提示"
+  s.description  = "SMImageProgress,图片上传加载进度提示"
 
   s.homepage     = "https://github.com/iossun/SMImageProgress"
 

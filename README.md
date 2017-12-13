@@ -2,61 +2,57 @@
 ##### 使用CocoaPods
 
 ```
-pod "SMTimeLine"
+pod "SMImageProgress"
 ```
 
 ##### 手动导入
 
 将Classes文件夹中的所有源代码拽入项目中
 
-导入主头文件：#import "SMTimeLineView.h"
+导入主头文件：#import "UIView+SMCircularProgress.h"
 
 ##### 示例
 
 ###### 初始化
 
 ```
-  self.timeLine = [[SMTimeLineView alloc] initWithFrame:CGRectMake(0, 300,kWinW,200)];
-  _timeLine.delegate = self;
-  [self.view addSubview:_timeLine];
+ _imageView.sm_progressView = [[SMLabelCircularProgressView alloc] init];
+ _imageView.sm_progressView.progressStyle = SMCircularProgressStyleAnnular;
 ``` 
 
-###### 时间回调
+###### 样式设置接口
 
 ```
-#pragma mark --- MNTimeLineTimeDelegate
-
--(void)timeLinePresentTime:(NSDate *)time{
-    NSTimeInterval cha =  [time timeIntervalSinceDate:[NSDate date]];
-    NSLog(@"%@ 时间差%d",time,(int)cha);
-}
+/* 环形进度条颜色 */
+@property(nonatomic, strong) UIColor *progressTintColor;
+/* 内部圆形颜色 */
+@property(nonatomic, strong) UIColor *innerTintColor;
+/* 环形是否圆角 */
+@property(nonatomic,assign) BOOL roundedCorners;
+/* 环宽所占半径的比例 */
+@property(nonatomic,assign) CGFloat thicknessRatio;
+/* 半径 */
+@property(nonatomic,assign) CGFloat radius;
+/* 进度样式 */
+@property(nonatomic,assign) SMCircularProgressStyle progressStyle;
+/* 模式 默认带蒙板 */
+@property(nonatomic,assign) SMCircularMaskType progressMaskType;
 ```   
 
-###### 设置时间指示位置
+###### 绘画进度
 
 ```
-[_timeLine setTimeLineWithDate:[NSDate date]];
+- (void)setProgress:(CGFloat)progress animated:(BOOL)animated;
 ```
 
-###### 添加标记区域
+###### 绘画原理
 
-```
--(void)addRect{
-    int x = arc4random() % 23;
-    NSDate *start = [NSDate dateWithTimeIntervalSinceNow:-x * 3600 - 24 * 3600];
-    
-    NSDate *stop = [NSDate dateWithTimeInterval:23 * 60 * 60 sinceDate:start];
-    
-    [_timeLine joinDrawTimeLineRectWithStart:start stop:stop];
-    [_timeLine updateTimeline];
-}
-```
+在drawInContext()里调用各种CoreGraphics的API,根据设置progress，不断重绘制
 
-###### 刷新动画
 
-```
-[_timeLine.updateView startUpdateAnimation];
-[_timeLine.updateView stopUpdateAnimation];
-```
+###### 淡出动画
+mask 属性本身就是个CALayer类型，有和其他图层一样的绘制和布局属性，CALayer 蒙版图实心的部分会被保留下来，其他的则会被抛弃。
+
+在绘制图层上加上mask层，设置mask图层，动画（mask图层以图片中为圆心，绘制遮盖所有进度图层的圆，动画mask图层半径不变，宽度不断缩短，可见进度图层重叠缩小，展开消失）
 
 如有问题：ios_sunmu@icloud.com

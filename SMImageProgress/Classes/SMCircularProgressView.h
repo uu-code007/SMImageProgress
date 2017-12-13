@@ -28,7 +28,7 @@
 @property(nonatomic,assign) CGFloat radius;
 /* 进度样式 */
 @property(nonatomic,assign) SMCircularProgressStyle progressStyle;
-
+/* 模式 默认带蒙板 */
 @property(nonatomic,assign) SMCircularMaskType progressMaskType;
 //-(void)setPlaceholderImage:(UIImage *)placeholderImage;
 
