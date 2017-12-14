@@ -1,4 +1,7 @@
 
+![](https://github.com/iossun/bolgImage/raw/master/SMImageProgress/SmImageProgress.gif
+)
+ 
 ##### 使用CocoaPods
 
 ```
@@ -51,8 +54,13 @@ pod "SMImageProgress"
 
 
 ###### 淡出动画
+
+![](https://github.com/iossun/bolgImage/raw/master/SMImageProgress/SMImageProgress.001.jpeg
+)
 mask 属性本身就是个CALayer类型，有和其他图层一样的绘制和布局属性，CALayer 蒙版图实心的部分会被保留下来，其他的则会被抛弃。
 
-在绘制图层上加上mask层，设置mask图层，动画（mask图层以图片中为圆心，绘制遮盖所有进度图层的圆，动画mask图层半径不变，宽度不断缩短，可见进度图层重叠缩小，展开消失）
+在绘制图层上加上mask层，设置mask图层，动画（mask图层以图片中为圆心，绘制遮盖所有进度图层的圆，动画mask图层半径不变，宽度不断缩短，图层重叠缩小，可见图层可见不断缩小）
+
+
 
 如有问题：ios_sunmu@icloud.com

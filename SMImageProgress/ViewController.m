@@ -58,7 +58,7 @@
 -(void)btnClick{
     
     [_imageView1.sm_progressView dismissProgressAnimated:YES];
-    [_imageView.sm_progressView dismissProgressAnimated:NO];
+    [_imageView.sm_progressView dismissProgressAnimated:YES];
     [_imageView2.sm_progressView dismissProgressAnimated:YES];
 }
 
